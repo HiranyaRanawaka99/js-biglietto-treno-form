@@ -1,39 +1,86 @@
-alert('Benvenuto su Boolean Treni!');
 
-// Variabili 
+// Variabili form
+const userName = document.getElementById('user-name');
+const distance = document.getElementById('distance');
+const age = document.getElementById('age');
+const btnGenerate = document.getElementById('btn-generate');
+const btnCancel = document.getElementById('btn-cancel');
 
-let Km = prompt('Inserisci i KM da percorrere');
-
-while (isNaN (Km)) {
-    alert('Inserisci numero')
-    Km = prompt('Inserisci i KM da percorrere'); 
-} 
-
-let eta = prompt('Quanti anni hai?');
-
-while (isNaN (eta)) {
-    alert ('Questo non è numero')
-    eta = prompt('Quanti anni hai?');
-}
-
-const prezzoKm = Km * 0.21;
+// Variabili ticket
+let ticketContainer = document.getElementById('ticket')
+const myName = document.getElementById('my-name');
+const ticketType = document.getElementById('ticket-type');
+const coach = document.getElementById('coach');
+const ticketNumber =document.getElementById('ticket-number');
+const finalPrice = document.getElementById('final-price');
 
 
-//Stampo in HTML
+// EVENT LISTENER 
 
-document.getElementById('km').innerHTML = Km;
+//Quando clicco sul bottone 'Genera', vedo i valori in console
 
-document.getElementById('eta').innerHTML = eta;
+btnGenerate.addEventListener('click', function () {
+    const userNameValue = userName.value;
+    console.log(userNameValue);
 
+    const distanceValue = parseInt(distance.value);
+    console.log(distanceValue);
 
-if (eta < 18) {
-    document.getElementById('sconto').innerHTML = (prezzoKm -((prezzoKm*20)/100)).toFixed(2) + '€.' 
-    document.getElementById('sconto-20').innerHTML = 'Il tuo biglietto è scontato del 20%.'
-} else if (eta > 65) {
-    document.getElementById('sconto').innerHTML = (prezzoKm -((prezzoKm*40)/100)).toFixed(2) + '€.'
-    document.getElementById('sconto-40').innerHTML = 'Il tuo biglietto è scontato del 40%.'
+    const ageValue = age.value;
+
+//Calcolo il prezzo del biglietto 
+const ticketFare = 0.21;
+let ticketPrice = ticketFare * distanceValue;
+
+// Calcolo il prezzo del biglietto applicando lo sconto 
+
+if (ageValue == 'kid') {
+    (ticketPrice -((ticketPrice*20)/100));
+} else if (ageValue == 'old') {
+    (ticketPrice -((ticketPrice*40)/100));
 } else {
-    document.getElementById('sconto').innerHTML =  prezzoKm.toFixed(2) + '€'
+      ticketPrice;
 }
+
+/*  Metodo migliore per calcore lo sconto
+if (ageValue == 'kid') {
+   ticketPrice *= 0.8;
+ } else if (ageValue == 'old') {
+   ticketPrice *= 0.6;
+ }
+*/
+console.log(age.value);
+console.log (ticketPrice);
+
+  //Valido gli input
+  if (isNaN(distanceValue) || !userNameValue) {
+    alert ('Inserisci i tuoi dati correttamente!')
+  } else {
+// Riporto il nome del passeggero e prezzo finale nella pagina web 
+myName.innerHTML = userNameValue
+finalPrice.innerHTML = ticketPrice.toFixed(2);
+
+// Offerta biglietto
+if (ageValue == 'kid') {
+  ticketType.innerHTML = 'Sconto 20%';
+ } else if (ageValue == 'old') {
+  ticketType.innerHTML = 'Sconto 40%'
+ } else {
+  ticketType.innerHTML = 'Biglietto standard'
+ }
+
+ //Numero carrozza
+coach.innerHTML= Math.floor(Math.random()*8)+1;
+
+//Codice biglietto
+ticketNumber.innerHTML= Math.floor(Math.random()*5000)+2500;
+
+// Mostriamo il biglietto solo quando verrà generato il biglieto
+ticketContainer.classList.remove('d-none');
+console.log(ticketContainer)
+
+}
+});
+
 
 

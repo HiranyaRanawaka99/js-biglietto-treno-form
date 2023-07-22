@@ -1,0 +1,38 @@
+body {
+    background-color: #B91450;
+    font-weight: 500;
+} 
+
+
+.main.container,
+.ticket-info {
+    background-color: white;
+}
+
+.info-container p {
+    color:#B91450;
+    text-align: center;
+}
+
+.info-container input,
+select {
+    border: 2px solid #c92460;
+    border-radius: 5px;
+}
+
+.buttons .btn {
+    color:#B91450;
+    background-color: lightgrey;
+    border: 2px solid gray;
+    font-weight: 500;
+}
+
+
+.btn:hover{
+    border: 2px solid goldenrod;
+}
+
+.table {
+    height: 150px;
+    border: 1px solid black
+}
